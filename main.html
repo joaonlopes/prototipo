@@ -95,7 +95,7 @@
         <!--                   Eventos         -->
         <div class="container">
           <!--Section: Content-->
-          <section  class="dark-grey-text">
+          <section class="dark-grey-text">
             <!-- Section heading -->
             <h3 class="font-weight-bold  mb-4 pb-2">
               <i class="far fa-calendar-alt"></i><span class="nav-link" style="display:inline">Eventos</span><a
@@ -173,6 +173,11 @@
 
 <script>
 
+  function htmlDecode(input) {
+    var doc = new DOMParser().parseFromString(input, "text/html");
+    return doc.documentElement.textContent;
+  }
+
   function getElementoEvento(titulo, data, texto) {
     return ' <div class="col-xs-12 col-md-6 col-lg-4"> \
                   <div class="card border-primary mb-3"> \
@@ -206,7 +211,7 @@
                       <div class="card border-info mb-3"> \
                         <div class="card-header">'+ data + ' \
                         </div> \
-                        <div class="card-body text-info"> \
+                        <div class="card-body "> \
                           <h5 class="card-title">'+ titulo + '</h5> \
                           <p class="card-text">'+ texto + '</p> \
                         </div> \
@@ -221,9 +226,9 @@
                     <div class="col"> \
                       <div class="card border-info mb-3"> \
                         <div class="card-header">'+ titulo + '</div> \
-                        <div class="card-body text-info"> \
+                        <div class="card-body "> \
                           <h5 class="card-title">'+ data + '</h5> \
-                          <p class="card-text"> '+ texto + ' \
+                          <p class="card-text"> '+ htmlDecode(texto) + ' \
                           </p> \
                         </div> \
                       </div> \
@@ -262,37 +267,37 @@
 
     if (actividade != null) {
       actividade.forEach(function (obj) {
-        $('#containerActividade').append(getElementoNoticia(obj.Titulo, obj.Data, obj.Texto));
+        $('#containerActividade').append(getElementoRSS(obj.Titulo, obj.Data, obj.Texto));
       });
     }
   }
 
 
-  var dados = {  
+  var dados = {
 
     "Actividade": [
       {
-        "Titulo": "Actividade 1",
+        "Titulo": "Insert results of a stored procedure into a temporary table",
         "Data": "01/01/2021 09:00",
-        "Texto": "Texto de exemplo"
+        "Texto": " &lt;p&gt;How do I do a &lt;code&gt;SELECT * INTO [temp table] FROM [stored procedure]&lt;/code&gt;? Not &lt;code&gt;FROM [Table]&lt;/code&gt; and without defining &lt;code&gt;[temp table]&lt;/code&gt;?&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;code&gt;Select&lt;/code&gt; all data from &lt;code&gt;BusinessLine&lt;/code&gt; into &lt;code&gt;tmpBusLine&lt;/code&gt; works fine.&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;select *&#xA;into tmpBusLine&#xA;from BusinessLine&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;I am trying the same, but using a &lt;code&gt;stored procedure&lt;/code&gt; that returns data, is not quite the same.&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;select *&#xA;into tmpBusLine&#xA;from&#xA;exec getBusinessLineHistory &#x27;16 Mar 2009&#x27;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;Output message:&lt;/strong&gt;&lt;/p&gt;&#xA;&#xA;&lt;blockquote&gt;&#xA;  &lt;p&gt;Msg 156, Level 15, State 1, Line 2&#xA;  Incorrect syntax near the keyword&#xA;  &#x27;exec&#x27;.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;p&gt;I have read several examples of creating a temporary table with the same structure as the output stored procedure, which works fine, but it would be nice to not supply any columns.&lt;/p&gt;&#xA;"
       },
 
       {
-        "Titulo": "Actividade 2",
+        "Titulo": "Answer by Matt Hamilton for Insert results of a stored procedure into a temporary table",
         "Data": "28/02/2021 08:30",
-        "Texto": "Texto de exemplo"
+        "Texto": "&lt;p&gt;In SQL Server 2005 you can use &lt;code&gt;INSERT INTO ... EXEC&lt;/code&gt; to insert the result of a stored procedure into a table. From &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/aa933206(SQL.80).aspx&quot; rel=&quot;noreferrer&quot;&gt;MSDN&#x27;s &lt;code&gt;INSERT&lt;/code&gt; documentation&lt;/a&gt; (for SQL Server 2000, in fact):&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;--INSERT...EXECUTE procedure example&#xA;INSERT author_sales EXECUTE get_author_sales&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;"
       },
 
       {
-        "Titulo": "Actividade 3",
+        "Titulo": "Answer by Gavin for Insert results of a stored procedure into a temporary table",
         "Data": "03/03/2021 11:00",
-        "Texto": "Texto de exemplo"
+        "Texto": "&lt;p&gt;If you want to do it without first declaring the temporary table, you could try creating a user-defined function rather than a &lt;a href=&quot;http://en.wikipedia.org/wiki/Stored_procedure&quot; rel=&quot;noreferrer&quot;&gt;stored procedure&lt;/a&gt; and make that user-defined function return a table. Alternatively, if you want to use the stored procedure, try something like this:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;CREATE TABLE #tmpBus&#xA;(&#xA;   COL1 INT,&#xA;   COL2 INT&#xA;)&#xA;&#xA;INSERT INTO #tmpBus&#xA;Exec SpGetRecords &#x27;Params&#x27;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;"
       },
 
       {
-        "Titulo": "Actividade 4",
+        "Titulo": "Answer by Christian Loris for Insert results of a stored procedure into a temporary table",
         "Data": "04/04/2021 15:00",
-        "Texto": "Texto de exemplo"
+        "Texto": "&lt;p&gt;This is an answer to a slightly modified version of your question. If you can abandon the use of a stored procedure for a user-defined function, you can use an inline table-valued user-defined function. This is essentially a stored procedure (will take parameters) that returns a table as a result set; and therefore will place nicely with an INTO statement.  &lt;/p&gt;&#xA;&#xA;&lt;p&gt;Here&#x27;s a good &lt;a href=&quot;http://www.sqlteam.com/article/user-defined-functions&quot; rel=&quot;noreferrer&quot;&gt;quick article&lt;/a&gt; on it and other user-defined functions.  If you still have a driving need for a stored procedure, you can wrap the inline table-valued user-defined function with a stored procedure. The stored procedure just passes parameters when it calls select * from the inline table-valued user-defined function.  &lt;/p&gt;&#xA;&#xA;&lt;p&gt;So for instance, you&#x27;d have an inline table-valued user-defined function to get a list of customers for a particular region:&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;CREATE FUNCTION CustomersByRegion &#xA;(  &#xA;    @RegionID int  &#xA;)&#xA;RETURNS TABLE &#xA;AS&#xA;RETURN &#xA;  SELECT *&#xA;  FROM customers&#xA;  WHERE RegionID = @RegionID&#xA;GO&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;You can then call this function to get what your results a such:&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;SELECT * FROM CustomersbyRegion(1)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;Or to do a SELECT INTO:&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;SELECT * INTO CustList FROM CustomersbyRegion(1)&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;If you still need a stored procedure, then wrap the function as such:&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;CREATE PROCEDURE uspCustomersByRegion &#xA;(  &#xA;    @regionID int  &#xA;)&#xA;AS&#xA;BEGIN&#xA;     SELECT * FROM CustomersbyRegion(@regionID);&#xA;END&#xA;GO&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;I think this is the most &#x27;hack-less&#x27; method to obtain the desired results.  It uses the existing features as they were intended to be used without additional complications.  By nesting the inline table-valued user-defined function in the stored procedure, you have access to the functionality in two ways.  Plus!  You have only one point of maintenance for the actual SQL code.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;The use of OPENROWSET has been suggested, but this is not what the OPENROWSET function was intended to be used for (From Books Online):&lt;/p&gt;&#xA;&#xA;&lt;blockquote&gt;&#xA;  &lt;p&gt;Includes all connection information&#xA;  that is required to access remote data&#xA;  from an OLE DB data source. This&#xA;  method is an alternative to accessing&#xA;  tables in a linked server and is a&#xA;  one-time, ad hoc method of connecting&#xA;  and accessing remote data by using OLE&#xA;  DB. For more frequent references to&#xA;  OLE DB data sources, use linked&#xA;  servers instead.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;p&gt;Using OPENROWSET will get the job done, but it will incur some additional overhead for opening up local connections and marshalling data.  It also may not be an option in all cases since it requires an ad hoc query permission which poses a security risk and therefore may not be desired.  Also, the OPENROWSET approach will preclude the use of stored procedures returning more than one result set.  Wrapping multiple inline table-value user-defined functions in a single stored procedure can achieve this.&lt;/p&gt;&#xA;"
       }
     ]
   }
