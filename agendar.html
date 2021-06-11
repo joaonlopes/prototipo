@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Agendamento de ferramentas</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="css/mdb.css">
+  <link rel="stylesheet" href="js/jquery-ui-1.12.1.custom/jquery-ui.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="js/jquery.js"></script>
+  <script src="js/mdb.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="js/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+
+</head>
+
+<body>
+  <!--Navbar-->
+  <nav class="navbar sticky-top  navbar-expand-lg navbar-dark bg-dark">
+    <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+      aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <span class="navbar-text white-text">
+      Agendamento de ferramentas
+    </span>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+
+      <!-- Links -->
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" href="main.html">
+            <i class="fas fa-home"></i> Inicio
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="eventos.html">
+            <i class="far fa-calendar-alt"></i> Eventos
+          </a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link " href="#">
+            <i class="fas fa-tools"></i> Agendamentos
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="noticia.html">
+            <i class="far fa-newspaper"></i> Noticias
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="mensagens.html">
+            <i class="far fa-comments"></i> Mensagens
+
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="configuracoes.html">
+            <i class="fas fa-cog"></i> Configurações
+
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!--/.Navbar-->
+
+  <div class="my-4"></div>
+
+  <div class="card">
+    <div class="card-header">
+      Criar agendamento para ferramenta
+    </div>
+    <div class="card-body">
+      <div class="container-fluid">
+
+        <!--    Agendamento          -->
+        <div class="my-4"></div>
+        <div class="row">
+          <div class="col-sm-6">
+
+            <div class="row">
+              <div class="col-sm-12 select-outline">
+                <i id="error_icon_date" class="fas fa-exclamation-circle" style="visibility: hidden;color:red"></i>
+                <i class="fas fa-pencil-alt prefix"></i>
+                <label for="datepicker1">Data</label>
+                <input type="text" id="datepicker1">
+              </div>
+            </div>
+
+            <div class="my-3"></div>
+
+            <div class="row">
+              <div class="col-sm-12 select-outline">
+                <i class="fas fa-pencil-alt prefix"></i>
+                <select class="browser-default custom-select" id="lista_de_ferramentas">
+                  <!--option selected>Selecionar ferramenta</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option-->
+                </select>
+
+              </div>
+            </div>
+
+            <div class="my-2"></div>
+
+            <div class="row">
+              <div class="col-sm-4 select-outline">
+                <i class="fas fa-pencil-alt prefix"></i>
+                <label for="inputHora">Hora</label>
+                <input type="text" id="inputHora" class="form-control">
+              </div>
+
+              <div class="col-sm-4 select-outline">
+                <i class="fas fa-pencil-alt prefix"></i>
+                <label for="inputMinuto">Minutos</label>
+                <input type="text" id="inputMinuto" class="form-control">
+              </div>
+              <div class="col-sm-4 select-outline">
+                <i class="fas fa-pencil-alt prefix"></i>
+                <label for="inputDuracao">Duração (horas)</label>
+                <input type="text" id="inputDuracao" class="form-control">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12 select-outline">
+                <div id="alerta" class="alert alert-danger" role="alert" style="visibility: hidden;">
+
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12 select-outline text-right">
+                <button type="button" class="btn btn-primary" id="btnGravar">Gravar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</body>
+
+<script>
+
+  $(function () {
+    $("#datepicker").datepicker();
+  });
+
+  $("#datepicker1").datepicker({
+    dateFormat: "dd-mm-yy"
+  });
+
+  var ferramentas = JSON.parse(localStorage.getItem('ferramentas'));
+
+  if (ferramentas != null)
+    ferramentas.forEach(function (obj) {
+      $('#lista_de_ferramentas').append(" <option>" + obj.Nome + "</option> ");
+    });
+
+  function agendarFerramenta() {
+
+
+    $("#alerta").html('')
+    $("#alerta").css("visibility", "hidden");
+    $("#error_icon_date").css("visibility", "hidden");
+    $("#lista_de_ferramentas").removeClass("is-invalid")
+    $("#inputHora").removeClass("is-invalid")
+    $("#inputMinuto").removeClass("is-invalid")
+    $("#inputDuracao").removeClass("is-invalid")
+
+    var valid = true;
+
+    if ($("#inputDuracao").val().trim().match(/^ *$/) !== null) {
+      $("#inputDuracao").addClass("is-invalid")
+      $("#alerta").append('<p>A duração de utilização da ferramenta é obrigatória.</p>')
+      $("#alerta").css("visibility", "visible");
+      $("#inputDuracao").focus();
+      valid = false;
+    }
+
+    if ($("#inputDuracao").val().trim().match(/^\d*$/) === null) {
+      $("#inputDuracao").addClass("is-invalid")
+      $("#alerta").append('<p>O valor especificado para a duração não é válido.</p>')
+      $("#alerta").css("visibility", "visible");
+      $("#inputDuracao").focus();
+      valid = false;
+    }
+
+    if ($("#inputMinuto").val().trim().match(/^ *$/) !== null) {
+      $("#inputMinuto").addClass("is-invalid")
+      $("#alerta").append('<p>O minuto de inicio de utilização da ferramenta é obrigatória.</p>')
+      $("#alerta").css("visibility", "visible");
+      $("#inputMinuto").focus();
+      valid = false;
+    }
+
+    if ($("#inputMinuto").val().trim().match(/^\d*$/)=== null) {
+      $("#inputMinuto").addClass("is-invalid")
+      $("#alerta").append('<p>O valor especificado para os minutos de inicio de utilização não é válido.</p>')
+      $("#alerta").css("visibility", "visible");
+      $("#inputMinuto").focus();
+      valid = false;
+    }else if ( parseInt($("#inputMinuto").val().trim()) < 0 || parseInt($("#inputMinuto").val().trim()) > 59) {
+      $("#inputMinuto").addClass("is-invalid")
+      $("#alerta").append('<p>O valor especificado para  os minutos de inicio de utilização  deve ser entre 0 e 59 .</p>')
+      $("#alerta").css("visibility", "visible");
+      $("#inputMinuto").focus();
+      valid = false;
+    }
+
+    if ($("#inputHora").val().trim().match(/^ *$/) !== null) {
+      $("#inputHora").addClass("is-invalid")
+      $("#alerta").append('<p>A hora de inicio de utilização da ferramenta é obrigatória.</p>')
+      $("#alerta").css("visibility", "visible");
+      $("#inputHora").focus();
+      valid = false;
+    }
+
+    if ($("#inputHora").val().trim().match(/^\d*$/) === null) {
+      $("#inputHora").addClass("is-invalid")
+      $("#alerta").append('<p>O valor especificado para a hora de inicio de utilização não é válido.</p>')
+      $("#alerta").css("visibility", "visible");
+      $("#inputHora").focus();
+      valid = false;
+    }else  if ( parseInt( $("#inputHora").val().trim()) <0 || parseInt( $("#inputHora").val().trim())> 23) {
+      $("#inputHora").addClass("is-invalid")
+      $("#alerta").append('<p>O valor especificado para a hora de inicio deve ser entre 0 e 23.</p>')
+      $("#alerta").css("visibility", "visible");
+      $("#inputHora").focus();
+      valid = false;
+    }
+
+    if ($("#lista_de_ferramentas").text().trim().match(/^ *$/) !== null) {
+      $("#lista_de_ferramentas").addClass("is-invalid")
+      $("#alerta").append('<p>É necessário escolher uma ferramenta para agendar. Se não existem ferramentas pode criar uma nova em <a href="c.adicionar.ferramenta.html">adicionar ferramenta<a/>.</p>')
+      $("#alerta").css("visibility", "visible");
+      $("#lista_de_ferramentas").focus();
+      valid = false;
+    }
+
+    if ($("#datepicker1").val().trim().match(/^ *$/) !== null) {
+      $("#datepicker1").addClass("is-invalid")
+      $("#alerta").html('<p>É necessário escolher a data em que pretende efectuar o agendamento da ferramenta.</p>')
+      $("#error_icon_date").css("visibility", "visible");
+      $("#alerta").css("visibility", "visible");
+      $("#datepicker1").focus();
+      valid = false;
+    }
+
+
+    
+
+    if (valid === false)
+      return;
+
+    var agendamentos = JSON.parse(localStorage.getItem('agendamentos'));
+
+    if (agendamentos === null)
+      agendamentos = []
+
+    DataDe = document.getElementById("datepicker1").value + " " + document.getElementById("inputHora").value + ":" + document.getElementById("inputMinuto").value
+    DataAte = document.getElementById("datepicker1").value + " " + document.getElementById("inputHora").value + ":" + document.getElementById("inputDuracao").value
+
+    var dados =
+    {
+      "Ferramenta": document.getElementById("lista_de_ferramentas").value,
+      "DataDe": DataDe,
+      "DataAte": DataAte
+    }
+
+    agendamentos.push(dados)
+
+    localStorage.setItem('agendamentos', JSON.stringify(agendamentos));
+
+    window.location.href = "main.html";
+  }
+
+
+  document.getElementById("btnGravar").addEventListener("click", function () {
+    agendarFerramenta();
+  });
+
+
+
+</script>
+
+</html>    $("#inputHora").inputmask("99");  //static mask

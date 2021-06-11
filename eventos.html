@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Agendar novo evento</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="css/mdb.css">
+  <link rel="stylesheet" href="js/jquery-ui-1.12.1.custom/jquery-ui.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="js/jquery.js"></script>
+  <script src="js/mdb.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="js/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+
+</head>
+
+<body>
+  <!--Navbar-->
+  <nav class="navbar sticky-top  navbar-expand-lg navbar-dark bg-dark">
+    <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+      aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <span class="navbar-text white-text">
+      Agendar novo evento
+    </span>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+
+      <!-- Links -->
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" href="main.html">
+            <i class="fas fa-home"></i> Inicio
+          </a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="#">
+            <i class="far fa-calendar-alt"></i> Eventos
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+
+        <li class="nav-item ">
+          <a class="nav-link " href="agendar.html">
+            <i class="fas fa-tools"></i> Agendamentos
+          </a>
+        </li>
+
+        <li class="nav-item ">
+          <a class="nav-link" href="noticia.html">
+            <i class="far fa-newspaper"></i> Noticias
+          </a>
+        </li>
+
+        <li class="nav-item ">
+          <a class="nav-link" href="mensagens.html">
+            <i class="far fa-comments"></i> Mensagens
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="configuracoes.html">
+            <i class="fas fa-cog"></i> Configurações
+
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!--/.Navbar-->
+
+  <div class="my-4"></div>
+
+  <div class="card">
+    <div class="card-header">
+      Detalhes do evento
+    </div>
+    <div class="card-body">
+      <div class="container-fluid">
+
+        <!--    Agendamento          -->
+        <div class="my-4"></div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="row">
+
+              <div class="col-md-4 select-outline">
+                <i id="error_icon_date" class="fas fa-exclamation-circle" style="visibility: hidden;color:red"></i>
+                <i class="fas fa-pencil-alt prefix"></i>
+                <label for="datepicker1">Data</label>
+                <input type="text" id="datepicker1" autofocus>
+              </div>
+
+              <div class="col-md-2  select-outline">
+                <i class="fas fa-pencil-alt prefix"></i>
+                <label for="inputHora">Hora</label>
+                <input type="text" id="inputHora" class="form-control">
+              </div>
+
+              <div class="col-md-2  select-outline">
+                <i class="fas fa-pencil-alt prefix"></i>
+                <label for="inputMinuto">Minutos</label>
+                <input type="text" id="inputMinuto" class="form-control">
+              </div>
+
+            </div>
+
+            <div class="my-2"></div>
+
+            <div class="row">
+              <div class="col-sm-12 select-outline">
+                <div class="md-form">
+                  <div class="form-outline">
+                    <i class="fas fa-pencil-alt prefix"></i>
+                    <input type="text" id="titulo_evento" class="form-control" autofocus="autofocus" />
+                    <label class="form-label" for="titulo_evento">Titulo</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12 select-outline">
+                <!--Textarea with icon prefix-->
+                <div class="md-form">
+                  <i class="fas fa-pencil-alt prefix"></i>
+                  <textarea id="texto_evento" class="md-textarea form-control" rows="10"></textarea>
+                  <label for="texto_evento">Descrição</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12 select-outline">
+                <div id="alerta" class="alert alert-danger" role="alert" style="visibility: hidden;">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12 select-outline text-right">
+                <button type="button" class="btn btn-primary" id="btnGravar">Gravar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+
+<script>
+
+  $(function () {
+    $("#datepicker").datepicker();
+  });
+
+  $("#datepicker1").datepicker({
+    dateFormat: "dd-mm-yy"
+  });
+
+
+  function key_press_event(event) {
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode === 13) {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      publicarEvento();
+
+    }
+  }
+
+  var inputHora = document.getElementById("datepicker1");
+  // Execute a function when the user releases a key on the keyboard
+  datepicker1.addEventListener("keyup", function (event) {
+    key_press_event(event);
+  });
+
+  var inputHora = document.getElementById("inputHora");
+  // Execute a function when the user releases a key on the keyboard
+  inputHora.addEventListener("keyup", function (event) {
+    key_press_event(event);
+  });
+
+  var inputMinuto = document.getElementById("inputMinuto");
+  // Execute a function when the user releases a key on the keyboard
+  inputMinuto.addEventListener("keyup", function (event) {
+    key_press_event(event);
+  });
+
+
+  var titulo_evento = document.getElementById("titulo_evento");
+  // Execute a function when the user releases a key on the keyboard
+  titulo_evento.addEventListener("keyup", function (event) {
+    key_press_event(event);
+  });
+
+
+  var eventos = JSON.parse(localStorage.getItem('eventos'));
+
+  if (eventos != null)
+    eventos.forEach(function (obj) {
+      $('#lista_de_ferramentas').append(" <option>" + obj.Nome + "</option> ");
+    });
+
+  function publicarEvento() {
+
+    $("#alerta").html('')
+    $("#alerta").css("visibility", "hidden");
+    $("#error_icon_date").css("visibility", "hidden");
+    $("#lista_de_ferramentas").removeClass("is-invalid")
+    $("#inputHora").removeClass("is-invalid")
+    $("#inputMinuto").removeClass("is-invalid")
+    $("#texto_evento").removeClass("is-invalid")
+    $("#titulo_evento").removeClass("is-invalid")
+
+
+    var valid = true;
+
+
+    if ($("#texto_evento").val().match(/^ *$/) !== null) {
+      $("#texto_evento").addClass("is-invalid")
+      $("#alerta").html('<p>O texto do evento é obrigatorio.</p>')
+      $("#alerta").css("visibility", "visible");
+      $("#texto_evento").focus();
+      valid = false;
+    }
+
+    if ($("#titulo_evento").val().match(/^ *$/) !== null) {
+      $("#titulo_evento").addClass("is-invalid")
+      $("#alerta").append('<p>O titulo do evento é obrigatorio.</p>')
+      $("#alerta").css("visibility", "visible");
+      $("#titulo_evento").focus();
+      valid = false;
+    }
+
+
+    if ($("#inputMinuto").val().trim().match(/^\d*$/)=== null) {
+      $("#inputMinuto").addClass("is-invalid")
+      $("#alerta").append('<p>O valor especificado para os minutos de inicio de utilização não é válido.</p>')
+      $("#alerta").css("visibility", "visible");
+      $("#inputMinuto").focus();
+      valid = false;
+    } else if (parseInt($("#inputMinuto").val().trim()) < 0 || parseInt($("#inputMinuto").val().trim()) > 59) {
+      $("#inputMinuto").addClass("is-invalid")
+      $("#alerta").append('<p>O valor especificado para  os minutos de inicio de utilização  deve ser entre 0 e 59 .</p>')
+      $("#alerta").css("visibility", "visible");
+      $("#inputMinuto").focus();
+      valid = false;
+    }
+
+    if ($("#inputHora").val().trim().match(/^ *$/) !== null) {
+      $("#inputHora").addClass("is-invalid")
+      $("#alerta").append('<p>A hora de inicio de utilização da ferramenta é obrigatória.</p>')
+      $("#alerta").css("visibility", "visible");
+      $("#inputHora").focus();
+      valid = false;
+    }
+
+    if ($("#inputHora").val().trim().match(/^\d*$/) === null) {
+      $("#inputHora").addClass("is-invalid")
+      $("#alerta").append('<p>O valor especificado para a hora de inicio de utilização não é válido.</p>')
+      $("#alerta").css("visibility", "visible");
+      $("#inputHora").focus();
+      valid = false;
+    } else if (parseInt($("#inputHora").val().trim()) < 0 || parseInt($("#inputHora").val().trim()) > 23) {
+      $("#inputHora").addClass("is-invalid")
+      $("#alerta").append('<p>O valor especificado para a hora de inicio deve ser entre 0 e 23.</p>')
+      $("#alerta").css("visibility", "visible");
+      $("#inputHora").focus();
+      valid = false;
+    }
+
+    if ($("#datepicker1").val().trim().match(/^ *$/) !== null) {
+      $("#datepicker1").addClass("is-invalid")
+      $("#alerta").html('<p>É necessário escolher a data em que pretende efectuar o agendamento da ferramenta.</p>')
+      $("#error_icon_date").css("visibility", "visible");
+      $("#alerta").css("visibility", "visible");
+      $("#datepicker1").focus();
+      valid = false;
+    }
+
+    if (valid === false)
+      return;
+
+
+
+    var eventos = JSON.parse(localStorage.getItem('eventos'));
+
+    if (eventos === null)
+      eventos = []
+
+    Data = document.getElementById("datepicker1").value + " " + document.getElementById("inputHora").value + ":" + document.getElementById("inputMinuto").value
+
+    var dados =
+    {
+      "Titulo": document.getElementById("titulo_evento").value,
+      "Data": Data,
+      "Texto": document.getElementById("texto_evento").value
+    }
+
+    eventos.splice(0, 0, dados);
+
+    localStorage.setItem('eventos', JSON.stringify(eventos));
+
+    window.location.href = "main.html";
+  }
+
+
+  document.getElementById("btnGravar").addEventListener("click", function () {
+    publicarEvento();
+  });
+
+
+</script>
+
+</html>

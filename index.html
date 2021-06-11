@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Inicio</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="js/jquery.js"></script>
+  <script src="js/mdb.js"></script>
+  <script src="js/bootstrap.js"></script>
+
+</head>
+
+<body>
+  <!--Navbar-->
+  <nav class="navbar sticky-top  navbar-expand-lg navbar-dark bg-dark">
+    <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+      aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <span class="navbar-text white-text">
+      Login
+    </span>
+
+  </nav>
+  <!--/.Navbar-->
+
+  <div class="my-4"></div>
+  <div class="card">
+    <div class="card-header">
+      Introduza as suas credenciais de acesso
+    </div>
+    <div class="card-body">
+      <div class="container-fluid ">
+
+        <!--    Agendamento          -->
+        <div class="my-4"></div>
+        <div class="row">
+          <div class="col-sm-6 text-center">
+
+            <div class="my-3"></div>
+            <div class="row">
+              <div class="col-md-5 select-outline">
+                <i class="fas fa-user"></i>
+                <label for="inputUser">Nome de utilizador</label>
+                <input type="text" id="inputUser" class="form-control" autofocus="autofocus">
+              </div>
+
+              <div class="col-md-5 select-outline">
+                <i class="fas fa-lock prefix"></i>
+                <label for="inputValidationEx2">Palavra passe</label>
+                <input type="password" id="inputValidationEx2" class="form-control ">
+              </div>
+
+              <div class="col-md-2 select-outline">
+                <button type="button" class="btn btn-primary" id="btnEntrar">Entrar</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="my-4"></div>
+
+
+        <div class="row">
+          <div class="col-xs-12 select-outline">
+            <div id="alert_credenciais" class="alert alert-danger" role="alert" style="visibility: hidden;">
+              Nome de utilizador ou palavra passe errados.
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 select-outline">
+            <div class="alert alert-primary" role="alert">
+              Mensagem do programador: As credenciais de administrador são admin/123
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+
+
+  var utilizadores = JSON.parse(localStorage.getItem('utilizadores'));
+  if (utilizadores === null) {
+    var utilizadores =
+      [
+        {
+          "login": "admin",
+          "url_foto": "",
+          "apresentacao": "Utilizador administrador",
+          "palavra_passe": "123"
+        },
+        {
+          "login": "test",
+          "url_foto": "",
+          "apresentacao": "Utilizador de teste",
+          "palavra_passe": "123"
+        }
+      ]
+
+    localStorage.setItem('utilizadores', JSON.stringify(utilizadores));
+  }
+
+
+  document.getElementById("btnEntrar").addEventListener("click", function () {
+    validate_credentials();
+  });
+
+  
+
+
+  function key_press_event(event) {
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode === 13) {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      validate_credentials();
+
+    }
+  }
+
+  var login_input = document.getElementById("inputUser");
+  // Execute a function when the user releases a key on the keyboard
+  login_input.addEventListener("keyup", function (event) {
+    key_press_event(event);
+  });
+
+
+  var password_input = document.getElementById("inputValidationEx2");
+  // Execute a function when the user releases a key on the keyboard
+  password_input.addEventListener("keyup", function (event) {
+    key_press_event(event);
+  });
+
+
+  var noticias = []
+  localStorage.setItem('noticias', JSON.stringify(noticias));
+
+  var ferramentas = []
+  localStorage.setItem('ferramentas', JSON.stringify(ferramentas));
+
+  var agendamentos = []
+  localStorage.setItem('agendamentos', JSON.stringify(agendamentos));
+
+  var eventos = []
+  localStorage.setItem('eventos', JSON.stringify(eventos));
+
+
+  function validate_credentials() {
+
+    var valid = false;
+
+    if (utilizadores != null) {
+      utilizadores.forEach(function (obj) {
+        if (obj.login == login_input.value && obj.palavra_passe == password_input.value)
+          valid = true;
+      });
+    }
+
+    if (valid)
+      window.location.href = "main.html";
+    else {
+      $("#inputValidationEx2").addClass("is-invalid")
+      $("#inputUser").addClass("is-invalid")
+      $("#alert_credenciais").css("visibility", "visible");
+
+      $("#inputValidationEx2").val('')
+      $("#inputUser").val('')
+
+      $("#inputUser").focus();
+    }
+  }
+
+</script>
+
+</html>

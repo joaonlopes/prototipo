@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Mensagens</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="css/mdb.css">
+  <link rel="stylesheet" href="js/jquery-ui-1.12.1.custom/jquery-ui.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="js/jquery.js"></script>
+  <script src="js/mdb.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="js/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+
+</head>
+
+<body>
+  <!--Navbar-->
+  <nav class="navbar sticky-top  navbar-expand-lg navbar-dark bg-dark">
+    <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+      aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <span class="navbar-text white-text">
+      Mensagens
+    </span>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+
+      <!-- Links -->
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" href="main.html">
+            <i class="fas fa-home"></i> Inicio
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="eventos.html">
+            <i class="far fa-calendar-alt"></i> Eventos
+          </a>
+        </li>
+
+        <li class="nav-item ">
+          <a class="nav-link " href="agendar.html">
+            <i class="fas fa-tools"></i> Agendamentos
+          </a>
+        </li>
+
+        <li class="nav-item ">
+          <a class="nav-link" href="noticia.html">
+            <i class="far fa-newspaper"></i> Noticias
+          </a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="#">
+            <i class="far fa-comments"></i> Mensagens
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="configuracoes.html">
+            <i class="fas fa-cog"></i> Configurações
+
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!--/.Navbar-->
+
+  <div class="my-4"></div>
+
+
+  <div class="container-fluid flex-fill chat_height_100">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="font-weight-bold mb-3">Membros</h5>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item active">João Lopes <i class="fas fa-circle red-text"></i></li>
+              <li class="list-group-item">Ligia Ferreira</li>
+
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-9 ">
+
+        <div class="container-fluid ">
+          <div class="row  chat_height_80">
+            <div class="col-sm-12">
+              <div class="card  ">
+                <div class="card-body" id="chat_area">
+                  <h5 class="font-weight-bold mb-3">Conversa com João Lopes</h5>
+
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="card bg-info mb-3">
+                          <div class="card-header">João Lopes</div>
+                          <div class="card-body">
+                            Ola, como está?
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="card bg-warning mb-3">
+                          <div class="card-header text-right">Voce</div>
+                          <div class="card-body text-right">
+                            Ola João, muito bem. Obrigado. Que belo protótipo computacional.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="card bg-info mb-3">
+                          <div class="card-header">João Lopes</div>
+                          <div class="card-body">
+                            Muito obrigado.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="row chat_height_20">
+            <div class="col-sm-12">
+              <hr class="mt-2 mb-3" />
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-sm-12 col-md-8">
+                    <div class="md-form">
+                      <i class="fas fa-pencil-alt prefix"></i>
+                      <textarea id="chat_text" class="md-textarea form-control" rows="2" autofocus="autofocus"></textarea>
+                      <label for="chat_text">Editar mensagem</label>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-4 text-center">
+                    <button type="button" class="btn btn-success" id="btnEnviar">Enviar</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+
+<script>
+
+  document.getElementById("btnEnviar").addEventListener("click", function () {
+
+    var mensagem = document.getElementById("chat_text").value
+
+    if (mensagem !== null && mensagem.match(/^ *$/) === null) {
+
+      var element = '<div class="row"><div class="col-sm-12"><div class="card bg-warning mb-3"><div class="card-header text-right">Voce</div><div class="card-body text-right">' + mensagem + '</div></div></div></div>'
+
+      $('#chat_area').append(element);
+
+      document.getElementById("chat_text").value = ''
+
+      $("#chat_area").stop().animate({ scrollTop: $("#chat_area")[0].scrollHeight}, 1000);
+    }
+
+  });
+
+</script>
+
+</html>

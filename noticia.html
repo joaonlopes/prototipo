@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Publicar noticia</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="css/mdb.css">
+  <link rel="stylesheet" href="js/jquery-ui-1.12.1.custom/jquery-ui.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="js/jquery.js"></script>
+  <script src="js/mdb.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="js/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+
+</head>
+
+<body>
+  <!--Navbar-->
+  <nav class="navbar sticky-top  navbar-expand-lg navbar-dark bg-dark">
+    <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+      aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <span class="navbar-text white-text">
+      Publicar noticia
+    </span>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+
+      <!-- Links -->
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" href="main.html">
+            <i class="fas fa-home"></i> Inicio
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="eventos.html">
+            <i class="far fa-calendar-alt"></i> Eventos
+
+          </a>
+        </li>
+
+        <li class="nav-item ">
+          <a class="nav-link " href="agendar.html">
+            <i class="fas fa-tools"></i> Agendamentos
+          </a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="noticia.html">
+            <i class="far fa-newspaper"></i> Noticias
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+
+        <li class="nav-item ">
+          <a class="nav-link" href="mensagens.html">
+            <i class="far fa-comments"></i> Mensagens
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="configuracoes.html">
+            <i class="fas fa-cog"></i> Configurações
+
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!--/.Navbar-->
+
+  <div class="my-4"></div>
+
+  <div class="card">
+    <div class="card-header">
+      Publicar noticia
+    </div>
+    <div class="card-body">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-sm-12 select-outline">
+            <div class="md-form">
+              <div class="form-outline">
+                <i class="fas fa-pencil-alt prefix"></i>
+                <input type="text" id="titulo_noticia" class="form-control"   autofocus="autofocus" />
+                <label class="form-label" for="titulo_noticia">Titulo</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 select-outline">
+            <!--Textarea with icon prefix-->
+            <div class="md-form">
+              <i class="fas fa-pencil-alt prefix"></i>
+              <textarea id="texto_noticia" class="md-textarea form-control" rows="10"></textarea>
+              <label for="texto_noticia">Texto a publicar</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="my-4"></div>
+        <div class="row">
+          <div class="col-sm-12 select-outline">
+            <div id="alerta" class="alert alert-danger" role="alert" style="visibility: hidden;">
+
+            </div>
+          </div>
+        </div>
+
+        <div class="my-4"></div>
+        <div class="row">
+          <div class="col-sm-12 select-outline text-right">
+            <button type="button" class="btn btn-primary" id="btnGravar">Gravar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+
+
+
+function key_press_event(event) {
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode === 13) {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      adicionarNoticia();
+
+    }
+  }
+
+  var titulo_noticia = document.getElementById("titulo_noticia");
+  // Execute a function when the user releases a key on the keyboard
+  titulo_noticia.addEventListener("keyup", function (event) {
+    key_press_event(event);
+  });
+
+
+
+  function adicionarNoticia() {
+
+    $("#alerta").html('')
+    $("#alerta").css("visibility", "hidden");
+    $("#titulo_noticia").removeClass("is-invalid")
+    $("#texto_noticia").removeClass("is-invalid")
+
+    var valid = true;
+    
+    if ($("#titulo_noticia").val().match(/^ *$/) !== null) {
+      $("#titulo_noticia").addClass("is-invalid")
+      $("#alerta").append('<p>O titulo da noticia é um campo obrigatório.</p>')
+      $("#alerta").css("visibility", "visible");
+      $("#titulo_noticia").focus();
+      valid = false;
+    }
+
+    if ($("#texto_noticia").val().match(/^ *$/) !== null) {
+      $("#texto_noticia").addClass("is-invalid")
+      $("#alerta").append('<p>O texto da noticia é um campo obrigatório.</p>')
+      $("#alerta").css("visibility", "visible");
+      $("#texto_noticia").focus();
+      valid = false;
+    }
+
+    if(valid === false)
+      return;
+
+    var noticias = JSON.parse(localStorage.getItem('noticias'));
+
+    if(noticias === null)
+      noticias = []
+
+
+    var dados = 
+      {
+        "Titulo": document.getElementById("titulo_noticia").value,
+        "Data": new Date().toUTCString(),
+        "Texto": document.getElementById("texto_noticia").value
+      }
+
+      noticias.splice(0, 0, dados);
+
+      localStorage.setItem('noticias', JSON.stringify(noticias));
+
+      window.location.href ="main.html";
+  }
+
+  document.getElementById("btnGravar").addEventListener("click", function() {
+    adicionarNoticia();
+  }); 
+
+
+</script>
+
+</html>

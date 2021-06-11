@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Configuracoes - Novo utilizador</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="css/mdb.css">
+  <link rel="stylesheet" href="js/jquery-ui-1.12.1.custom/jquery-ui.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="js/jquery.js"></script>
+  <script src="js/mdb.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="js/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+
+</head>
+
+<body>
+  <!--Navbar-->
+  <nav class="navbar sticky-top  navbar-expand-lg navbar-dark bg-dark">
+    <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+      aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <span class="navbar-text white-text">
+      Configuracoes - Novo utilizador
+    </span>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+
+      <!-- Links -->
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" href="main.html">
+            <i class="fas fa-home"></i> Inicio
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="eventos.html">
+            <i class="far fa-calendar-alt"></i> Eventos
+
+          </a>
+        </li>
+
+        <li class="nav-item ">
+          <a class="nav-link " href="agendar.html">
+            <i class="fas fa-tools"></i> Agendamentos
+          </a>
+        </li>
+
+        <li class="nav-item ">
+          <a class="nav-link" href="noticia.html">
+            <i class="far fa-newspaper"></i> Noticias
+          </a>
+        </li>
+
+        <li class="nav-item ">
+          <a class="nav-link" href="mensagens.html">
+            <i class="far fa-comments"></i> Mensagens
+
+          </a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="configuracoes.html">
+            <i class="fas fa-cog"></i> Configurações
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!--/.Navbar-->
+
+  <div class="my-4"></div>
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="configuracoes.html">Configuracoes</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Novo utilizador</li>
+    </ol>
+  </nav>
+
+
+  <div class="my-4"></div>
+
+  <div class="card">
+    <div class="card-header">
+      Credenciais de acesso
+    </div>
+    <div class="card-body">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-sm-12 select-outline">
+            <div class="alert alert-primary" role="alert">
+              Para definir mais informações acerca do seu perfil, como o nome e a sua apresentação, o utilizador deve ir
+              a "Configurações->Personalizar perfil" depois de se autenticar com estas credenciais.
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 col-md-4 select-outline">
+            <div class="md-form">
+              <div class="form-outline">
+                <i class="fas fa-pencil-alt prefix"></i>
+                <input type="text" id="nome_de_utilizador" class="form-control" autofocus="autofocus" />
+                <label class="form-label" for="nome_de_utilizador">Nome de utilizador</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-4 select-outline">
+            <!--Textarea with icon prefix-->
+            <div class="md-form">
+              <i class="fas fa-lock prefix"></i>
+              <input type="password" id="palavra_passe1" class="form-control" autofocus="autofocus" />
+              <label class="form-label" for="palavra_passe1">Palavra passe</label>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-4 select-outline">
+            <!--Textarea with icon prefix-->
+            <div class="md-form">
+              <i class="fas fa-lock prefix"></i>
+              <input type="password" id="palavra_passe2" class="form-control" autofocus="autofocus" />
+              <label class="form-label" for="palavra_passe2">Repita palavra passe</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="my-4"></div>
+        <div class="row">
+          <div class="col-sm-12 select-outline">
+            <div id="alerta" class="alert alert-danger" role="alert" style="visibility: hidden;">
+
+            </div>
+          </div>
+        </div>
+
+        <div class="my-4"></div>
+        <div class="row">
+          <div class="col-sm-12 select-outline text-right">
+            <button type="button" class="btn btn-primary" id="btnGravar">Gravar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+
+<script>
+
+  document.getElementById("btnGravar").addEventListener("click", function () {
+    validate_credentials();
+  });
+
+
+  function validate_credentials() {
+
+    $("#alerta").html('')
+    $("#alerta").css("visibility", "hidden");
+    $("#nome_de_utilizador").removeClass("is-invalid")
+    $("#palavra_passe1").removeClass("is-invalid")
+    $("#palavra_passe2").removeClass("is-invalid")
+
+    if ($("#nome_de_utilizador").val().match(/^ *$/) !== null) {
+      $("#nome_de_utilizador").addClass("is-invalid")
+      $("#alerta").html('<p>O nome de utilizador é obrigatório.</p>')
+      $("#alerta").css("visibility", "visible");
+      $("#nome_de_utilizador").focus();
+      return;
+    }
+
+    if ($("#palavra_passe1").val().match(/^ *$/) !== null) {
+      $("#palavra_passe1").addClass("is-invalid")
+      $("#alerta").html('<p>A palavra passe é obrigatória.</p>')
+      $("#alerta").css("visibility", "visible");
+      $("#palavra_passe1").focus();
+      return;
+    }
+
+    if ($("#palavra_passe2").val().match(/^ *$/) !== null) {
+      $("#palavra_passe2").addClass("is-invalid")
+      $("#alerta").html('<p>A palavra passe é obrigatória.</p>')
+      $("#alerta").css("visibility", "visible");
+      $("#palavra_passe2").focus();
+      return;
+    }
+
+    if ($("#palavra_passe1").val() !== $("#palavra_passe2").val()) {
+      $("#palavra_passe1").addClass("is-invalid")
+      $("#palavra_passe2").addClass("is-invalid")
+      $("#alerta").html('<p>As palavras passe não são iguais.</p>')
+      $("#alerta").css("visibility", "visible");
+      $("#palavra_passe1").focus();
+      return;
+    }
+
+    var utilizadores = JSON.parse(localStorage.getItem('utilizadores'));
+    if (utilizadores != null){
+      utilizadores.forEach(function (obj) {
+        if (obj.login == $("#nome_de_utilizador").val()) {
+          $("#nome_de_utilizador").addClass("is-invalid")
+          $("#alerta").html('<p>Já existe um utilizador com esse nome de utilizador.</p>')
+          $("#alerta").css("visibility", "visible");
+          $("#nome_de_utilizador").focus();
+          return;
+        }
+      });
+
+
+      var novo_utilizador =  {
+          "login": $("#nome_de_utilizador").val(),
+          "url_foto": "",
+          "apresentacao": "",
+          "palavra_passe": $("#palavra_passe1").val()
+        }
+
+      utilizadores.push(novo_utilizador);
+
+      localStorage.setItem('utilizadores', JSON.stringify(utilizadores));
+    }
+  }
+
+</script>
+
+</html>
