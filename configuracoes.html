@@ -9,7 +9,7 @@
   <!-- MDB icon -->
   <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <link rel="stylesheet" href="libs/fontawesome-free-5.1/css/all.css">
   <!-- Google Fonts Roboto -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
   <!-- Bootstrap core CSS -->
@@ -134,40 +134,5 @@
   </div>
 </body>
 
-<script>
-
-
-
-  function getElementoEvento(titulo, data, texto) {
-    return ' <div class="row"> \
-                <div class="col"> \
-                  <div class="card border-primary mb-3"> \
-                    <div class="card-header">'+ titulo + '</div> \
-                    <div class="card-body text-primary"> \
-                      <h5 class="card-title">'+ data + '</h5> \
-                      <p class="card-text">'+ texto + '</p> \
-                    </div> \
-                  </div> \
-                </div> \
-              </div> ';
-
-  }
-
-
-  function popularNoticias() {
-
-    var eventos = JSON.parse(localStorage.getItem('dados')).Eventos;
-    var agendamentos = JSON.parse(localStorage.getItem('dados')).Agendamentos;
-    var noticias = JSON.parse(localStorage.getItem('dados')).Noticias;
-    var actividade = JSON.parse(localStorage.getItem('dados')).Actividade;
-
-    eventos.forEach(function (obj) {
-      $('#containerEventos').append(getElementoEvento(obj.Titulo, obj.Data, obj.Texto));
-    });
-  }
-
-  popularNoticias();
-
-</script>
 
 </html>
